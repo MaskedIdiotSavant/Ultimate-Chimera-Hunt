@@ -265,7 +265,7 @@ function PANEL:Paint( w, h )
 	local CenterY = ScrH() / 2.0
 	local CenterX = ScrW() / 2.0
 	
-	surface.SetDrawColor( 255, 255, 255, 10 );
+	surface.SetDrawColor( 0, 0, 0, 200 );
 	surface.DrawRect( 0, CenterY - CENTER_HEIGHT, ScrW(), CENTER_HEIGHT * 2 );
 	surface.DrawRect( 0, CenterY - CENTER_HEIGHT - 4, ScrW(), 2 );
 	surface.DrawRect( 0, CenterY + CENTER_HEIGHT + 2, ScrW(), 2 );
@@ -305,7 +305,7 @@ function ShowTeam()
 								surface.SetDrawColor( team.GetColor(ID) )
 								surface.DrawOutlinedRect( 0, 0, btn:GetWide(), btn:GetTall() )
 							end
-							
+				
 				if (  IsValid( LocalPlayer() ) && LocalPlayer():Team() == ID ) then
 					btn:SetDisabled( true )
 				end
