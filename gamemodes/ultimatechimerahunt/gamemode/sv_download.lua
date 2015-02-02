@@ -7,7 +7,7 @@ end
 
 //------------------------------Gamemode--------------------
 
-// ---- Old AddFolder for the gamemode (Broken scoreboard and missing Models Textures)
+// ---- Old AddFolder for the gamemode (Broken scoreboard and missing Models Textures) you can uncomment it but it's not recommended (Those files will basically download using ressource.AddWorkshop)
 /*AddFolder("sound/UCH/music/");
 AddFolder("sound/UCH/music/cues/");
 AddFolder("sound/UCH/music/voting/");
@@ -28,25 +28,6 @@ AddFolder("materials/models/uch/mghost/");
 AddFolder("materials/models/uch/birdgib/");
 AddFolder("materials/models/uch/");*/
 
-//---------------------------------------------------------
-
-
-//---------------------------------Hats----------------------------
-
-AddFolder("models/gmod_tower/");
-AddFolder("models/UCH_Hats/");
-
-AddFolder("materials/UCH_Hats/");
-AddFolder("materials/UCH_Hats/PaperMask/");
-AddFolder("materials/models/gmod_tower/");
-
-AddFolder("models/uch/");
-AddFolder("materials/models/uch/hats/pigmask/");
-AddFolder("materials/models/uch_hats/");
-
-//---------------------------------------------------------------
-
-//AddFolder("maps/"); // Reason why every maps are downloading one shot?
 
 resource.AddFile("resource/fonts/apple_kid.TTF");
 resource.AddFile("resource/fonts/twoson.TTF");
@@ -58,4 +39,4 @@ resource.AddFile("scripts/sounds/gril.growl.txt");
 resource.AddFile("scripts/sounds/riar.roar.txt");
 resource.AddFile("scripts/sounds/stip.stomp.txt");*/
 
-resource.AddWorkshop( 118628579 )
+resource.AddWorkshop( 385438672 )
