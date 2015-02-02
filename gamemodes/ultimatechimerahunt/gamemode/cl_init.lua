@@ -254,6 +254,13 @@ function GM:KeyPress(ply, key)
 
 end
 
+function DoStompEffect(data)
+	local ply = LocalPlayer()
+	local pos = data:ReadVector()
+	
+	util.ScreenShake(pos, 3, 3, .5, 1);
+end
+usermessage.Hook( "DoStompEffect", DoStompEffect );
 -- Map Voting --
 
 local GMChooser = nil 
