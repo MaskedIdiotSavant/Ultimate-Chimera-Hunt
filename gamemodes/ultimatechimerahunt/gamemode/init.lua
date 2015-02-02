@@ -1163,4 +1163,5 @@ util.AddNetworkString("GetRank");
 util.AddNetworkString("SendRank");
 util.AddNetworkString("MapList");
 util.AddNetworkString("WaitTime");
+util.AddNetworkString("DoStompEffect");
 //util.AddNetworkString("CreateUCHRagdoll")

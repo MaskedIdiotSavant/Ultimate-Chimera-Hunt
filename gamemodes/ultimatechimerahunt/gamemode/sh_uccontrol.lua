@@ -190,13 +190,19 @@ function UCThink()
                 uc.LastStomp = (uc.LastStomp || 0);
                 uc.LastPos = uc.LastPos || uc:GetPos()
                 if (uc.PlayStomp && CurTime() >= uc.LastStomp) then
-                                if(uc:MovementKeyDown() && uc:Alive() && uc.LastPos:IsEqualTol(uc:GetPos(),60) == false) then
-                                        uc.LastPos = uc:GetPos()
-                                        uc.LastStomp = (CurTime() + 0.50);
-                                        uc.PlayStomp = false;
-                                        uc:EmitSound("UCH/chimera/step.mp3", 82, math.random(94, 105));
-                                        util.ScreenShake(uc:GetPos(), 5, 5, .5, (roardistance * 1.85));
-                                end
+                    if(uc:MovementKeyDown() && uc:Alive() && uc.LastPos:IsEqualTol(uc:GetPos(),60) == false) then
+                        uc.LastPos = uc:GetPos()
+                        uc.LastStomp = (CurTime() + 0.50);
+                        uc.PlayStomp = false;
+                        uc:EmitSound("UCH/chimera/step.mp3", 82, math.random(94, 105));
+						local filter = RecipientFilter()
+						filter:AddAllPlayers()
+						filter:RemovePlayer( GetUC() )
+						umsg.Start( "DoStompEffect", filter )
+							umsg.Vector(uc:GetPos())
+						umsg.End()
+									
+                    end
                 end
 		
 		if (uc:GetNWBool("FirstTimeJump", true) != true) then

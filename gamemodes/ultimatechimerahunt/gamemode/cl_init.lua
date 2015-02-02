@@ -99,7 +99,6 @@ function DrawLogo(x, y, size)
 	//Tail
 	local w = (txtw * .14);
 	local h = (w * 4);
-
 	local deg = 6;
 	local sway = (deg * math.sin((CurTime() * 2)));
 	
@@ -128,23 +127,15 @@ function DrawLogo(x, y, size)
 	surface.DrawTexturedRect((x - (txtw * .5)), (y - (txth * .5)), txtw, txth);
 	
 end
-
-
-
 function PositionScoreboard(ScoreBoard)
 	
 	ScoreBoard:SetSize(700, ScrH() - 100);
 	ScoreBoard:SetPos((ScrW() - ScoreBoard:GetWide()) / 2, 50);
 	
 end
-
 function PaintSplashScreen()
-
 	DrawLogo((ScrW() * .5), (ScrH() * .175));
-
 end
-
-
 function GM:RenderScreenspaceEffects()
 	
 	if (LocalPlayer():IsGhost()) then
@@ -204,15 +195,11 @@ function GM:RenderScreenspaceEffects()
 	end
 	
 end
-
-
 local function MakeRagFly()
 	local ply = net.ReadEntity();
 	ply.RagShouldFly = true;
 end
 net.Receive("UCMakeRagFly", MakeRagFly);
-
-
 function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
  
 	local tab = {}
@@ -237,7 +224,6 @@ function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
 	return true
  
 end
-
 function GM:PrePlayerDraw(ply)
 	
 	if (!LocalPlayer():IsGhost() && ply:IsGhost() || (ply:IsUC() && !ply:Alive()) || (ply:IsGhost() && ply:GetModel() != "models/uch/mghost.mdl")) then
@@ -245,29 +231,27 @@ function GM:PrePlayerDraw(ply)
 	end
 	
 end
-
 function GM:KeyPress(ply, key)
-
 	if (!ply:IsGhost() && (key == IN_ATTACK || key == IN_USE)) then
 		LocalPlayer().XHairAlpha = 242;
 	end
-
 end
-
+function DoStompEffect(data)
+	local ply = LocalPlayer()
+	local pos = data:ReadVector()
+	
+	util.ScreenShake(pos, 3, 3, .5, 1);
+end
+usermessage.Hook( "DoStompEffect", DoStompEffect );
 -- Map Voting --
-
 local GMChooser = nil 
 function GetVoteScreen()
-
 	if ( IsValid( GMChooser ) ) then return GMChooser end
 	
 	GMChooser = vgui.Create( "VoteScreen" )
 	return GMChooser
-
 end
-
 function ShowMapChooserForGamemode()
-
 	local votescreen = GetVoteScreen()
 	votescreen:ChooseMap(self)
 	
@@ -282,9 +266,7 @@ function ShowMapChooserForGamemode()
 	end
 	
 	GAMEMODE:ScoreboardHide();
-
 end
-
 local function UMSGMusic(data)
 	if GetConVarNumber("uch_music") == 1 then
 		surface.PlaySound("UCH/music/round/music".. data:ReadString()..".mp3")

@@ -10,7 +10,7 @@ function PANEL:Init()
 	self:SetSkin( GAMEMODE.HudSkin )
 		
 	self.lblGamemodeAuthor = vgui.Create( "DLabel", self )
-		self.lblGamemodeAuthor:SetText( "Gamemode by Aska, Fluxmage, and Schythed" )
+		self.lblGamemodeAuthor:SetText( "Gamemode by : Aska, Fluxmage, Schythed and Raphy" )
 		self.lblGamemodeAuthor:SetFont( "FRETTA_MEDIUM" )
 		self.lblGamemodeAuthor:SetColor( color_white )
 		
@@ -88,4 +88,3 @@ function ShowSplash()
 	pnl:MakePopup()
 
 end
-
