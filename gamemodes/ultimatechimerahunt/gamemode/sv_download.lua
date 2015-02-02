@@ -32,11 +32,4 @@ AddFolder("materials/models/uch/");*/
 resource.AddFile("resource/fonts/apple_kid.TTF");
 resource.AddFile("resource/fonts/twoson.TTF");
 
-/*
-==============Files that keep downloading================
-resource.AddFile("scripts/sounds/bit.bite.txt");
-resource.AddFile("scripts/sounds/gril.growl.txt");
-resource.AddFile("scripts/sounds/riar.roar.txt");
-resource.AddFile("scripts/sounds/stip.stomp.txt");*/
-
-resource.AddWorkshop( 385438672 )
+resource.AddWorkshop( 385438672 ) // UCH Workshop Addon
