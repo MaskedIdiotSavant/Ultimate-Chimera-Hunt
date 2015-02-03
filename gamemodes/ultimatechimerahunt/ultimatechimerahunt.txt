@@ -4,6 +4,5 @@
 	"title"		"Ultimate Chimera Hunt"
 	"maps"		"^ch_"
 	"menusystem"	"1"
-	"workshopid"	"118628579"
-	"help" 		"You are fucking gay"
+	"workshopid"	"385438672"
 }
