@@ -189,12 +189,12 @@ function AnimateGhost(ply, velocity)
 	
 	if (cup && CurTime() >= ply.LastSippyCup) then
 		ply.LastSippyCup = (CurTime() + math.Rand(20, 40));
-		ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, ACT_GESTURE_MELEE_ATTACK1);
+		ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, ACT_GESTURE_MELEE_ATTACK1, true);
 	end
 	
 	if (CurTime() >= ply.LastOogly) then
 		ply.LastOogly = (CurTime() + math.Rand(10, 20));
-		ply:AnimRestartGesture(GESTURE_SLOT_GRENADE, ACT_GESTURE_RANGE_ATTACK2);
+		ply:AnimRestartGesture(GESTURE_SLOT_GRENADE, ACT_GESTURE_RANGE_ATTACK2, true);
 	end
 	
 	if (CLIENT) then

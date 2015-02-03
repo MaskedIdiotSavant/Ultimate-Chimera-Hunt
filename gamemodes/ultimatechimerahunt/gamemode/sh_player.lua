@@ -438,12 +438,11 @@ function CalcView(ply, pos, ang, fov)
 			
 			local view = {};
 			
-			local bob = (math.sin((CurTime() * num)) * 4);
+			local bob = (math.sin((CurTime() * num)) * 2);
 			
 			view.origin = Vector(pos.x, pos.y, (pos.z + bob));
 			view.angles = ang;
 			view.fov = fov;
-			
 			return view;
 			
 		end

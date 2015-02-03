@@ -11,6 +11,7 @@ include("cl_voice.lua")
 include("vgui_vote.lua")
 
 CreateClientConVar( "uch_music", "1", true, false )
+CreateClientConVar( "uch_pigmask_thirdperson", "0", true, false )
 
 function Initialize()
 	
