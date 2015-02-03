@@ -29,8 +29,11 @@ include("sv_download.lua")
 include("sv_mapcontrol.lua")
 
 map_votetime = CreateConVar( "map_votetime", "20", { FCVAR_ARCHIVE } )
-wait_time = CreateConVar( "UCH_wait_time", "60", { FCVAR_ARCHIVE } )
+wait_time = CreateConVar( "UCH_wait_time", "60", { FCVAR_ARCHIVE }, "Time before the first round start" )
 mount_tf2_maps = CreateConVar( "uch_tf2_maps", "0", { FCVAR_ARCHIVE }, "Allow TF2 maps to be mounted by the gamemode (TF2 must be mounted on your server) [1 = Enabled. 0 = Disabled]" )
+ulx_mode = CreateConVar("uch_ulx_mode", "1", { FCVAR_ARCHIVE }, "Use ULX/Evolve Ranks on the scoreboard instead of Pigmask Ranks. If no admin mods are detected, Pigmask Ranks will be used.")
+
+SetGlobalBool("ulx_mode",ulx_mode:GetBool())
 
 function GM:Initialize()
 	
@@ -62,6 +65,10 @@ function GM:Initialize()
 		maptype = 1; // We're playing on a default ch_ map
 	else
 		maptype = 0; // We're playing on a different map than a default ch_ map, will be used to launch the music system
+	end
+	
+	if(IsMounted("tf") == false) then
+		print("******* TF2 isn't mounted. Please mount it on your server to avoid model collision problems! *******")
 	end
 	
 end
@@ -263,8 +270,9 @@ function GM:PlayerInitialSpawn(ply)
 		ply:SetTeam(TEAM_PIGS);
 	end
 	
-	timer.Simple(.1, function() ply.SendLua(ply, "surface.PlaySound(\"UCH/music/start.mp3\")") end);
-	timer.Simple(.5, function() ply.SendLua(ply, "LocalPlayer().VoteMusic = \"music3.mp3\"") end);
+	timer.Simple(0.6, function() ply:ConCommand("stopsound") end)
+	timer.Simple(1.1, function() ply.SendLua(ply, "surface.PlaySound(\"UCH/music/intro.mp3\")") end);
+	timer.Simple(1.5, function() ply.SendLua(ply, "LocalPlayer().VoteMusic = \"music3.mp3\"") end);
 	
 	ply:SendLua("CacheStuff()");
 	ply:SendLua("ShowSplash()");
@@ -555,6 +563,12 @@ function StartGame()
 	//start game, choose round, etc.
 	
 	FreezePlayers(false);
+	
+	for k,v in pairs(player.GetAll()) do
+		if(v:Team() != TEAM_SPECTATE) then
+			v:SetGhost(false)
+		end
+	end
 	
 	if (!EnoughPlayers()) then
 		print("GAME TRIED TO START, NOT ENOUGH PLAYERS!");
