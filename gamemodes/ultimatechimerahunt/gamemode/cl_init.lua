@@ -270,7 +270,7 @@ function ShowMapChooserForGamemode()
 end
 local function UMSGMusic(data)
 	if GetConVarNumber("uch_music") == 1 then
-		surface.PlaySound("UCH/music/round/music".. data:ReadString()..".mp3")
+		surface.PlaySound("UCH/music/rounds/music".. data:ReadString()..".mp3")
 		print("launched")
 	end
 end

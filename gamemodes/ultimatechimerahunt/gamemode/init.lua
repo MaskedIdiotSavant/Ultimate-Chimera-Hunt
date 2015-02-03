@@ -30,6 +30,7 @@ include("sv_mapcontrol.lua")
 
 map_votetime = CreateConVar( "map_votetime", "20", { FCVAR_ARCHIVE } )
 wait_time = CreateConVar( "UCH_wait_time", "60", { FCVAR_ARCHIVE }, "Time before the first round start" )
+music_mode = CreateConVar( "uch_music_mode", "0", { FCVAR_ARCHIVE }, "Always use Mother music on every maps [0=Disabled (Default) 1= Enabled]" )
 mount_tf2_maps = CreateConVar( "uch_tf2_maps", "0", { FCVAR_ARCHIVE }, "Allow TF2 maps to be mounted by the gamemode (TF2 must be mounted on your server) [1 = Enabled. 0 = Disabled]" )
 ulx_mode = CreateConVar("uch_ulx_mode", "1", { FCVAR_ARCHIVE }, "Use ULX/Evolve Ranks on the scoreboard instead of Pigmask Ranks. If no admin mods are detected, Pigmask Ranks will be used.")
 
@@ -65,6 +66,10 @@ function GM:Initialize()
 		maptype = 1; // We're playing on a default ch_ map
 	else
 		maptype = 0; // We're playing on a different map than a default ch_ map, will be used to launch the music system
+	end
+	
+	if(music_mode:GetBool() == true) then
+		timer.Simple(.1, function() RemoveAmbient(); end) // Remove every single ambient_generic on the map
 	end
 	
 	if(IsMounted("tf") == false) then
@@ -270,7 +275,7 @@ function GM:PlayerInitialSpawn(ply)
 		ply:SetTeam(TEAM_PIGS);
 	end
 	
-	timer.Simple(0.6, function() ply:ConCommand("stopsound") end)
+	ply.SendLua(ply, "RunConsoleCommand('stopsound')")
 	timer.Simple(1.1, function() ply.SendLua(ply, "surface.PlaySound(\"UCH/music/intro.mp3\")") end);
 	timer.Simple(1.5, function() ply.SendLua(ply, "LocalPlayer().VoteMusic = \"music3.mp3\"") end);
 	
@@ -579,6 +584,9 @@ function StartGame()
 	
 	game.CleanUpMap();
 	RemoveDoors();
+	if(music_mode:GetBool() == true) then
+		RemoveAmbient();
+	end
 	
 	SalsaCheck();
 	
@@ -593,7 +601,7 @@ function StartGame()
 	
 	hook.Call("UCHStartRound", self)
 	
-	if(maptype == 0) then
+	if(maptype == 0 || music_mode:GetBool() == true) then
 		LaunchTimer()
 	end
 	
@@ -602,7 +610,7 @@ end
 
 function LaunchTimer() // Music System Start
 
-	local musicnumber = math.random(1,26)
+	local musicnumber = math.random(1,27)
 	local file2 = file.Read("data/uch/music.txt", "GAME");
 	local file3 = string.Explode(";", file2);
 	local duration = file3[musicnumber]
@@ -613,7 +621,7 @@ function LaunchTimer() // Music System Start
 end
 
 function UpdateTimer(var) // Music System update
-	local musicnumber = math.random(1,26)
+	local musicnumber = math.random(1,27)
 	local file2 = file.Read("data/uch/music.txt", "GAME");
 	local file3 = string.Explode(";", file2);
 	local duration = file3[musicnumber]

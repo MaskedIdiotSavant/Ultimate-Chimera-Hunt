@@ -20,6 +20,13 @@ local whitelist = {
 	"models/props_gameplay/sign_gameplay01.mdl"
 };
 
+function RemoveAmbient()
+	for k, v in pairs(ents.FindByClass("ambient_generic")) do
+			v:Remove();
+	end
+	print("***AMBIENT_GENERIC REMOVED***")
+end
+
 function RemoveDoors()
 	local map = game.GetMap();
 	if (map:Left(6) == "arena_") then
