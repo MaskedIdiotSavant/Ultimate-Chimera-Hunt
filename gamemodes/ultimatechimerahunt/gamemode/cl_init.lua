@@ -163,8 +163,10 @@ function GM:RenderScreenspaceEffects()
 		if (rag != nil && rag:IsValid()) then
 			if (!ply:IsUC()) then
 				rag:SetSkin(ply.skin or 1);
-				rag:SetBodygroup(1, ply.bgroup);
-				rag:SetBodygroup(2, ply.bgroup2);
+				if(ply.bgroup != nil) then
+					rag:SetBodygroup(1, ply.bgroup);
+					rag:SetBodygroup(2, ply.bgroup2);
+				end
 				
 				if (!rag.Flew && ply.RagShouldFly) then
 					rag.Flew = true;

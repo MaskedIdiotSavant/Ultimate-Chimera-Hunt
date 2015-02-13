@@ -435,6 +435,13 @@ function GM:PlayerDeath(ply, wep, kill)
 	
 	ply:AddDeaths(1);
 	
+	timer.Simple(3,function()
+		local prag = ply:GetRagdollEntity()
+		if(prag != nil && ply:IsUC() == false) then
+			prag:Remove()
+		end		
+	end)
+	
 	local t = nil;
 	
 	if (ply:Team() == TEAM_PIGS) then
