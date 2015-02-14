@@ -1,5 +1,5 @@
 
-ENT.Base = "base_entity"
+ENT.Base = "chimera_spawn"
 ENT.Type = "point"
 
 /*---------------------------------------------------------
